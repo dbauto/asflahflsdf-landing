@@ -5,6 +5,11 @@
   const puzzleStage = document.querySelector('.puzzle-stage');
   const puzzlePieces = Array.from(document.querySelectorAll('.puzzle-piece'));
   const puzzleTitle = document.querySelector('.hero-puzzle-title');
+  const heroSticky = document.querySelector('.hero-sticky');
+  const heroTop = document.querySelector('.hero-puzzle-top');
+  const heroCopy = document.querySelector('.hero-puzzle-copy');
+  const puzzleWrap = document.querySelector('.puzzle-wrap');
+  const puzzleMeta = document.querySelector('.puzzle-meta');
   const problemSection = document.querySelector('.problem');
   const problemScroll = document.querySelector('.problem-scroll');
   const problemStatement = document.querySelector('.big-statement');
@@ -81,14 +86,20 @@
       const heroRect = puzzleHero.getBoundingClientRect();
       const travel = Math.max(1, puzzleHero.offsetHeight - window.innerHeight);
       const raw = Math.max(0, Math.min(1, -heroRect.top / travel));
-
-      // Preserve the exact scattered hero composition first.
-      // The assembly only begins after the user has scrolled into the hero.
-      const startAt = 0.14;
-      const endAt = 0.84;
-      const normalized = Math.max(0, Math.min(1, (raw - startAt) / (endAt - startAt)));
-      const p = normalized * normalized * (3 - 2 * normalized);
       const desktopMotion = !reduceMotion && window.innerWidth > 760;
+
+      const phase = (value, start, end) => {
+        const n = Math.max(0, Math.min(1, (value - start) / Math.max(.001, end - start)));
+        return n * n * (3 - 2 * n);
+      };
+
+      // Avenna-style sequence:
+      // 1) scattered pieces assemble
+      // 2) connected puzzle becomes the full-screen focus
+      // 3) puzzle exits upward and hands off to the next scene
+      const assemble = phase(raw, .07, .42);
+      const focus = phase(raw, .42, .68);
+      const exit = phase(raw, .74, .98);
 
       puzzlePieces.forEach((piece, index) => {
         if (!desktopMotion) {
@@ -99,30 +110,55 @@
         const sx = Number(piece.dataset.sx || 0);
         const sy = Number(piece.dataset.sy || 0);
         const sr = Number(piece.dataset.sr || 0);
+        const x = sx * (1 - assemble);
+        const y = sy * (1 - assemble);
+        const r = sr * (1 - assemble);
+        const scale = .92 + (.08 * assemble);
 
-        const x = sx * (1 - p);
-        const y = sy * (1 - p);
-        const r = sr * (1 - p);
-        const scale = .92 + (.08 * p);
-
-        // No movement at the exact starting frame; subtle float begins only
-        // once the user starts scrolling, then fades out as pieces connect.
-        const motionGate = Math.max(0, Math.min(1, raw / startAt));
-        const drift = Math.sin((scrollTop * .008) + index) * 2.2 * (1 - p) * motionGate;
+        const motionGate = Math.max(0, Math.min(1, raw / .07));
+        const drift = Math.sin((scrollTop * .008) + index) * 2 * (1 - assemble) * motionGate;
 
         piece.style.transform =
           'translate3d(' + (x + drift) + 'px,' + y + 'px,0) rotate(' + r + 'deg) scale(' + scale + ')';
       });
 
-      puzzleHero.classList.toggle('solved', normalized > .92);
+      puzzleHero.classList.toggle('solved', assemble > .96);
+      puzzleHero.classList.toggle('focused', focus > .55 && exit < .3);
+
+      if (heroTop && desktopMotion) {
+        heroTop.style.opacity = String(1 - focus);
+        heroTop.style.transform = 'translateY(' + (-28 * focus) + 'px)';
+      }
+
+      if (heroCopy && desktopMotion) {
+        heroCopy.style.opacity = String(1 - focus);
+        heroCopy.style.transform =
+          'translate3d(0,' + (-70 * focus) + 'px,0) scale(' + (1 - .025 * focus) + ')';
+      }
+
+      if (puzzleMeta && desktopMotion) {
+        puzzleMeta.style.opacity = String(1 - Math.min(1, focus * 1.25));
+        puzzleMeta.style.transform = 'translateY(' + (-18 * focus) + 'px)';
+      }
 
       if (puzzleStage && desktopMotion) {
-        puzzleStage.style.transform = 'scale(' + (.965 + p * .035) + ')';
+        const stageScale = .965 + assemble * .035 + focus * .27 - exit * .035;
+        const stageY = -118 * focus - 165 * exit;
+        puzzleStage.style.transform =
+          'translate3d(0,' + stageY + 'px,0) scale(' + stageScale + ')';
+      }
+
+      if (puzzleWrap && desktopMotion) {
+        puzzleWrap.style.transform = 'translateY(' + (-10 * focus) + 'px)';
+      }
+
+      if (heroSticky && desktopMotion) {
+        heroSticky.style.opacity = String(1 - exit * .96);
+        heroSticky.style.transform = 'translateY(' + (-78 * exit) + 'px)';
       }
 
       if (puzzleTitle && desktopMotion) {
-        puzzleTitle.style.transform = 'translateY(' + (-10 * p) + 'px)';
-        puzzleTitle.style.opacity = String(1 - p * .12);
+        puzzleTitle.style.transform = 'translateY(' + (-10 * assemble) + 'px)';
       }
     }
 
