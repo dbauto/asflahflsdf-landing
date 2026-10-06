@@ -105,9 +105,12 @@
       // 1) scattered pieces assemble
       // 2) connected puzzle becomes the full-screen focus
       // 3) puzzle exits upward and hands off to the next scene
-      const assemble = phase(raw, .07, .42);
-      const focus = phase(raw, .42, .68);
-      const exit = phase(raw, .74, .98);
+      const assemble = phase(raw, .05, .30);
+      const focus = phase(raw, .30, .43);
+
+      // Hold the completed puzzle fully clear for roughly one viewport of scroll.
+      // Only after that hold should the handoff to the next section begin.
+      const exit = phase(raw, .72, .96);
 
       puzzlePieces.forEach((piece, index) => {
         if (!desktopMotion) {
@@ -131,7 +134,7 @@
       });
 
       puzzleHero.classList.toggle('solved', assemble > .96);
-      puzzleHero.classList.toggle('focused', focus > .55 && exit < .3);
+      puzzleHero.classList.toggle('focused', focus > .55 && exit < .05);
 
       if (heroTop && desktopMotion) {
         heroTop.style.opacity = String(1 - focus);
@@ -161,7 +164,8 @@
       }
 
       if (heroSticky && desktopMotion) {
-        heroSticky.style.opacity = String(1 - exit * .96);
+        // Keep the completed puzzle at full opacity throughout the hold phase.
+        heroSticky.style.opacity = exit > 0 ? String(1 - exit * .96) : '1';
         heroSticky.style.transform = 'translateY(' + (-78 * exit) + 'px)';
       }
 
