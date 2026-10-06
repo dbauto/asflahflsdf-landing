@@ -101,6 +101,20 @@
         return n * n * (3 - 2 * n);
       };
 
+      const offsetTopWithin = (element, ancestor) => {
+        let top = 0;
+        let node = element;
+        let guard = 0;
+
+        while (node && node !== ancestor && guard < 12) {
+          top += node.offsetTop || 0;
+          node = node.offsetParent;
+          guard += 1;
+        }
+
+        return top;
+      };
+
       // Avenna-style sequence:
       // 1) scattered pieces assemble
       // 2) connected puzzle becomes the full-screen focus
@@ -152,9 +166,18 @@
         puzzleMeta.style.transform = 'translateY(' + (-18 * focus) + 'px)';
       }
 
-      if (puzzleStage && desktopMotion) {
+      if (puzzleStage && heroSticky && desktopMotion) {
         const stageScale = .965 + assemble * .035 + focus * .27 - exit * .035;
-        const stageY = -118 * focus - 165 * exit;
+
+        // Center the completed puzzle using its real layout position instead of
+        // a fixed pixel offset. This keeps the hold frame centered vertically
+        // on different viewport heights and screen sizes.
+        const layoutTop = offsetTopWithin(puzzleStage, heroSticky);
+        const layoutCenter = layoutTop + (puzzleStage.offsetHeight / 2);
+        const viewportCenter = heroSticky.clientHeight / 2;
+        const centerShift = viewportCenter - layoutCenter;
+
+        const stageY = (centerShift * focus) - (165 * exit);
         puzzleStage.style.transform =
           'translate3d(0,' + stageY + 'px,0) scale(' + stageScale + ')';
       }
