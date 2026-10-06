@@ -203,34 +203,47 @@
       const rawProblem = Math.max(0, Math.min(1, -rect.top / travel));
       const wordCount = Math.max(1, problemWords.length - 1);
 
+      const smooth = (value, start, end) => {
+        const n = Math.max(0, Math.min(1, (value - start) / Math.max(.001, end - start)));
+        return n * n * (3 - 2 * n);
+      };
+
+      // Phase 1: reveal the full sentence early.
+      // Phase 2: hold the fully readable, centered sentence for ~1 viewport.
+      // Phase 3: release it upward only near the end of the pinned scene.
+      const revealProgress = smooth(rawProblem, .02, .34);
+      const releaseProgress = smooth(rawProblem, .80, .98);
+
       problemWords.forEach((word, index) => {
         const isItalic = word.classList.contains('problem-word-italic');
-
-        // The sentence paints itself across the pinned scroll scene.
-        // The italic conclusion intentionally trails the body copy.
-        const stagger = (index / wordCount) * .76 + (isItalic ? .045 : 0);
-        const local = Math.max(0, Math.min(1, (rawProblem - stagger) / .19));
+        const wordPosition = index / wordCount;
+        const staggerStart = wordPosition * .20 + (isItalic ? .018 : 0);
+        const local = Math.max(0, Math.min(1, (revealProgress - staggerStart) / .28));
         const eased = local * local * (3 - 2 * local);
 
         const y = 34 * (1 - eased);
-        const x = isItalic ? 24 * (1 - eased) : 0;
+        const x = isItalic ? 20 * (1 - eased) : 0;
         const blur = 7 * (1 - eased);
+        const releaseY = -72 * releaseProgress;
 
-        word.style.opacity = String(.10 + eased * .90);
-        word.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+        word.style.opacity = String((.10 + eased * .90) * (1 - releaseProgress * .78));
+        word.style.transform =
+          'translate3d(' + x + 'px,' + (y + releaseY) + 'px,0)';
         word.style.filter = 'blur(' + blur + 'px)';
       });
 
       if (problemKicker && !reduceMotion) {
-        const kp = Math.max(0, Math.min(1, rawProblem / .16));
-        problemKicker.style.opacity = String(.28 + kp * .72);
-        problemKicker.style.transform = 'translateY(' + (16 * (1 - kp)) + 'px)';
+        const kp = smooth(rawProblem, .01, .10);
+        problemKicker.style.opacity = String((.28 + kp * .72) * (1 - releaseProgress * .7));
+        problemKicker.style.transform =
+          'translateY(' + ((16 * (1 - kp)) - 52 * releaseProgress) + 'px)';
       }
 
       const hint = problemSection?.querySelector('.problem-scroll-hint');
       if (hint) {
-        const fade = Math.max(0, 1 - Math.max(0, rawProblem - .12) / .18);
-        hint.style.opacity = String(fade * .62);
+        const hintIn = smooth(rawProblem, .02, .10);
+        const hintOut = smooth(rawProblem, .18, .28);
+        hint.style.opacity = String(.62 * hintIn * (1 - hintOut));
       }
     }
 
