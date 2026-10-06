@@ -39,7 +39,8 @@ svg{display:block}
 .scroll-progress span{display:block;height:100%;width:0;background:var(--lime);transform-origin:left center}
 .back-to-top{
   position:fixed;
-  right:clamp(18px,2.4vw,34px);
+  left:50%;
+  right:auto;
   bottom:clamp(18px,2.4vw,32px);
   z-index:95;
   width:58px;
@@ -59,19 +60,19 @@ svg{display:block}
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-  transform:translateY(16px) scale(.84);
+  transform:translate3d(-50%,16px,0) scale(.84);
   transition:opacity .26s ease,transform .32s cubic-bezier(.2,.8,.2,1),visibility .26s ease,background .2s ease,box-shadow .2s ease;
 }
 .back-to-top.visible{
   opacity:1;
   visibility:visible;
   pointer-events:auto;
-  transform:translateY(0) scale(1);
+  transform:translate3d(-50%,0,0) scale(1);
 }
 .back-to-top:hover{
   background:var(--lime);
   color:var(--deep);
-  transform:translateY(-3px) scale(1.03);
+  transform:translate3d(-50%,-3px,0) scale(1.03);
   box-shadow:0 18px 40px rgba(10,42,34,.3);
 }
 .back-to-top:focus-visible{
@@ -475,7 +476,8 @@ svg{display:block}
   .back-to-top{
     width:52px;
     height:52px;
-    right:16px;
+    left:50%;
+    right:auto;
     bottom:16px;
   }
   .back-to-top svg{width:18px;height:18px}
