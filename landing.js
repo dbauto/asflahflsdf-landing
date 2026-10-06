@@ -40,7 +40,13 @@
       const heroRect = puzzleHero.getBoundingClientRect();
       const travel = Math.max(1, puzzleHero.offsetHeight - window.innerHeight);
       const raw = Math.max(0, Math.min(1, -heroRect.top / travel));
-      const p = raw * raw * (3 - 2 * raw);
+
+      // Preserve the exact scattered hero composition first.
+      // The assembly only begins after the user has scrolled into the hero.
+      const startAt = 0.14;
+      const endAt = 0.84;
+      const normalized = Math.max(0, Math.min(1, (raw - startAt) / (endAt - startAt)));
+      const p = normalized * normalized * (3 - 2 * normalized);
       const desktopMotion = !reduceMotion && window.innerWidth > 760;
 
       puzzlePieces.forEach((piece, index) => {
@@ -48,24 +54,34 @@
           piece.style.transform = 'none';
           return;
         }
+
         const sx = Number(piece.dataset.sx || 0);
         const sy = Number(piece.dataset.sy || 0);
         const sr = Number(piece.dataset.sr || 0);
+
         const x = sx * (1 - p);
         const y = sy * (1 - p);
         const r = sr * (1 - p);
         const scale = .92 + (.08 * p);
-        const drift = Math.sin((scrollTop * .008) + index) * 2.5 * (1 - p);
-        piece.style.transform = 'translate3d(' + (x + drift) + 'px,' + y + 'px,0) rotate(' + r + 'deg) scale(' + scale + ')';
+
+        // No movement at the exact starting frame; subtle float begins only
+        // once the user starts scrolling, then fades out as pieces connect.
+        const motionGate = Math.max(0, Math.min(1, raw / startAt));
+        const drift = Math.sin((scrollTop * .008) + index) * 2.2 * (1 - p) * motionGate;
+
+        piece.style.transform =
+          'translate3d(' + (x + drift) + 'px,' + y + 'px,0) rotate(' + r + 'deg) scale(' + scale + ')';
       });
 
-      puzzleHero.classList.toggle('solved', raw > .84);
+      puzzleHero.classList.toggle('solved', normalized > .92);
+
       if (puzzleStage && desktopMotion) {
         puzzleStage.style.transform = 'scale(' + (.965 + p * .035) + ')';
       }
+
       if (puzzleTitle && desktopMotion) {
-        puzzleTitle.style.transform = 'translateY(' + (-12 * p) + 'px)';
-        puzzleTitle.style.opacity = String(1 - p * .16);
+        puzzleTitle.style.transform = 'translateY(' + (-10 * p) + 'px)';
+        puzzleTitle.style.opacity = String(1 - p * .12);
       }
     }
 
