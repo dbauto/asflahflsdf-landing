@@ -6,6 +6,7 @@
   const puzzlePieces = Array.from(document.querySelectorAll('.puzzle-piece'));
   const puzzleTitle = document.querySelector('.hero-puzzle-title');
   const problemSection = document.querySelector('.problem');
+  const problemScroll = document.querySelector('.problem-scroll');
   const problemStatement = document.querySelector('.big-statement');
   const problemKicker = problemSection?.querySelector('.statement-kicker, .eyebrow');
   const problemWords = [];
@@ -125,33 +126,40 @@
       }
     }
 
-    if (problemSection && problemWords.length) {
-      const rect = problemSection.getBoundingClientRect();
-      const viewport = window.innerHeight;
-
-      // Start while the statement is approaching the viewport and finish
-      // before the cards become the visual focus.
-      const rawProblem = Math.max(0, Math.min(1, (viewport * .86 - rect.top) / (viewport * .92)));
+    if (problemScroll && problemWords.length) {
+      const rect = problemScroll.getBoundingClientRect();
+      const travel = Math.max(1, problemScroll.offsetHeight - window.innerHeight);
+      const rawProblem = Math.max(0, Math.min(1, -rect.top / travel));
       const wordCount = Math.max(1, problemWords.length - 1);
 
       problemWords.forEach((word, index) => {
         const isItalic = word.classList.contains('problem-word-italic');
-        const stagger = (index / wordCount) * .70 + (isItalic ? .035 : 0);
-        const local = Math.max(0, Math.min(1, (rawProblem - stagger) / .24));
-        const eased = local * local * (3 - 2 * local);
-        const y = 30 * (1 - eased);
-        const x = isItalic ? 18 * (1 - eased) : 0;
-        const blur = 5.5 * (1 - eased);
 
-        word.style.opacity = String(.12 + eased * .88);
+        // The sentence paints itself across the pinned scroll scene.
+        // The italic conclusion intentionally trails the body copy.
+        const stagger = (index / wordCount) * .76 + (isItalic ? .045 : 0);
+        const local = Math.max(0, Math.min(1, (rawProblem - stagger) / .19));
+        const eased = local * local * (3 - 2 * local);
+
+        const y = 34 * (1 - eased);
+        const x = isItalic ? 24 * (1 - eased) : 0;
+        const blur = 7 * (1 - eased);
+
+        word.style.opacity = String(.10 + eased * .90);
         word.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
         word.style.filter = 'blur(' + blur + 'px)';
       });
 
       if (problemKicker && !reduceMotion) {
-        const kp = Math.max(0, Math.min(1, rawProblem * 2.2));
-        problemKicker.style.opacity = String(.35 + kp * .65);
-        problemKicker.style.transform = 'translateY(' + (12 * (1 - kp)) + 'px)';
+        const kp = Math.max(0, Math.min(1, rawProblem / .16));
+        problemKicker.style.opacity = String(.28 + kp * .72);
+        problemKicker.style.transform = 'translateY(' + (16 * (1 - kp)) + 'px)';
+      }
+
+      const hint = problemSection?.querySelector('.problem-scroll-hint');
+      if (hint) {
+        const fade = Math.max(0, 1 - Math.max(0, rawProblem - .12) / .18);
+        hint.style.opacity = String(fade * .62);
       }
     }
 
