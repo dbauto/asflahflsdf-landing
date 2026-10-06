@@ -1,8 +1,10 @@
 (() => {
   const root = document.documentElement;
   const progress = document.querySelector('.scroll-progress span');
-  const stage = document.querySelector('.hero-stage');
-  const cards = Array.from(document.querySelectorAll('.float-card'));
+  const puzzleHero = document.querySelector('.hero-puzzle');
+  const puzzleStage = document.querySelector('.puzzle-stage');
+  const puzzlePieces = Array.from(document.querySelectorAll('.puzzle-piece'));
+  const puzzleTitle = document.querySelector('.hero-puzzle-title');
   const menuBtn = document.querySelector('.menu-toggle');
   const mobileMenu = document.querySelector('.mobile-menu');
   const storyItems = Array.from(document.querySelectorAll('.story-item'));
@@ -34,17 +36,37 @@
     const max = document.documentElement.scrollHeight - window.innerHeight;
     if (progress) progress.style.width = (max > 0 ? (scrollTop / max) * 100 : 0) + '%';
 
-    if (!reduceMotion && stage) {
-      const rect = stage.getBoundingClientRect();
-      const p = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
-      stage.style.transform = 'translateY(' + (p * 42) + 'px) scale(' + (1 - p * .035) + ') rotate(' + (-p * .6) + 'deg)';
-      const offsets = [
-        {x:-18,y:-24,r:-6},{x:10,y:18,r:5},{x:16,y:-16,r:-1},{x:-10,y:20,r:-3}
-      ];
-      cards.forEach((card, i) => {
-        const o = offsets[i] || offsets[0];
-        card.style.transform = 'translate3d(' + (o.x * p) + 'px,' + (o.y * p) + 'px,0) rotate(' + o.r + 'deg)';
+    if (puzzleHero && puzzlePieces.length) {
+      const heroRect = puzzleHero.getBoundingClientRect();
+      const travel = Math.max(1, puzzleHero.offsetHeight - window.innerHeight);
+      const raw = Math.max(0, Math.min(1, -heroRect.top / travel));
+      const p = raw * raw * (3 - 2 * raw);
+      const desktopMotion = !reduceMotion && window.innerWidth > 760;
+
+      puzzlePieces.forEach((piece, index) => {
+        if (!desktopMotion) {
+          piece.style.transform = 'none';
+          return;
+        }
+        const sx = Number(piece.dataset.sx || 0);
+        const sy = Number(piece.dataset.sy || 0);
+        const sr = Number(piece.dataset.sr || 0);
+        const x = sx * (1 - p);
+        const y = sy * (1 - p);
+        const r = sr * (1 - p);
+        const scale = .92 + (.08 * p);
+        const drift = Math.sin((scrollTop * .008) + index) * 2.5 * (1 - p);
+        piece.style.transform = 'translate3d(' + (x + drift) + 'px,' + y + 'px,0) rotate(' + r + 'deg) scale(' + scale + ')';
       });
+
+      puzzleHero.classList.toggle('solved', raw > .84);
+      if (puzzleStage && desktopMotion) {
+        puzzleStage.style.transform = 'scale(' + (.965 + p * .035) + ')';
+      }
+      if (puzzleTitle && desktopMotion) {
+        puzzleTitle.style.transform = 'translateY(' + (-12 * p) + 'px)';
+        puzzleTitle.style.opacity = String(1 - p * .16);
+      }
     }
 
     let activeIndex = 0;
@@ -69,6 +91,17 @@
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', updateScroll);
+
+  if (puzzleStage && !reduceMotion) {
+    puzzleStage.addEventListener('pointermove', (event) => {
+      if (window.innerWidth <= 760 || puzzleHero?.classList.contains('solved')) return;
+      const rect = puzzleStage.getBoundingClientRect();
+      const nx = (event.clientX - rect.left) / rect.width - .5;
+      const ny = (event.clientY - rect.top) / rect.height - .5;
+      puzzleStage.style.perspectiveOrigin = ((nx + .5) * 100) + '% ' + ((ny + .5) * 100) + '%';
+    });
+  }
+
   updateScroll();
 
   document.querySelectorAll('.faq-q').forEach(button => {
