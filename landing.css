@@ -38,7 +38,7 @@ svg{display:block}
 .scroll-progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:120;pointer-events:none}
 .scroll-progress span{display:block;height:100%;width:0;background:var(--lime);transform-origin:left center}
 .nav{
-  position:fixed;z-index:90;top:16px;left:50%;transform:translateX(-50%);
+  position:absolute;z-index:90;top:16px;left:50%;transform:translateX(-50%);
   width:min(1440px,calc(100% - 28px));height:70px;padding:0 18px 0 22px;
   display:flex;align-items:center;gap:32px;border:1px solid rgba(16,36,29,.10);
   border-radius:18px;background:rgba(244,241,233,.78);backdrop-filter:blur(18px);
@@ -119,7 +119,7 @@ svg{display:block}
 .card-ready small{font-size:10px;opacity:.62;margin-top:17px}
 .stage-note{position:absolute;left:24px;bottom:21px;color:#fff;font:400 9px "DM Mono";letter-spacing:.16em;opacity:.64}
 
-.problem{padding-top:0;padding-bottom:160px;position:relative}
+.problem{padding-top:0;padding-bottom:160px;position:relative;z-index:6;background:var(--paper);margin-top:-12vh}
 .problem-scroll{height:180vh;position:relative}
 .problem-sticky-copy{
   position:sticky;
@@ -327,23 +327,23 @@ svg{display:block}
 }
 
 /* === Quadro-inspired interactive puzzle hero === */
-.hero.hero-puzzle{min-height:215vh;padding:0;position:relative}
-.hero-sticky{position:sticky;top:0;height:100vh;min-height:760px;overflow:hidden;padding-top:112px;display:flex;align-items:flex-start}
+.hero.hero-puzzle{min-height:305vh;padding:0;position:relative}
+.hero-sticky{position:sticky;top:0;height:100vh;min-height:760px;overflow:hidden;padding-top:112px;display:flex;align-items:flex-start;will-change:transform,opacity}
 .hero-puzzle-inner{height:100%;display:flex;flex-direction:column}
-.hero-puzzle-top{display:flex;justify-content:space-between;gap:24px;align-items:center}
+.hero-puzzle-top{display:flex;justify-content:space-between;gap:24px;align-items:center;will-change:transform,opacity}
 .hero-mini-note{font:500 9px "DM Mono",monospace;letter-spacing:.14em;opacity:.48}
-.hero-puzzle-copy{display:grid;grid-template-columns:1.5fr .5fr;gap:5vw;align-items:end;margin-top:18px;position:relative;z-index:4}
+.hero-puzzle-copy{display:grid;grid-template-columns:1.5fr .5fr;gap:5vw;align-items:end;margin-top:18px;position:relative;z-index:4;will-change:transform,opacity}
 .hero-puzzle-title{margin:0!important;font-size:clamp(64px,8.3vw,128px)!important;line-height:.78!important;letter-spacing:-.077em!important;max-width:1100px!important}
 .hero-puzzle-title em{font-family:Georgia,serif;font-weight:400}
 .hero-puzzle-side{padding-bottom:5px}
 .hero-puzzle-side p{font-size:clamp(15px,1.15vw,19px)}
-.puzzle-wrap{margin-top:32px;flex:1;min-height:0;display:flex;flex-direction:column;position:relative;z-index:2}
-.puzzle-meta{height:30px;display:flex;justify-content:space-between;align-items:center;font:500 9px "DM Mono",monospace;letter-spacing:.14em}
+.puzzle-wrap{margin-top:32px;flex:1;min-height:0;display:flex;flex-direction:column;position:relative;z-index:2;will-change:transform}
+.puzzle-meta{height:30px;display:flex;justify-content:space-between;align-items:center;font:500 9px "DM Mono",monospace;letter-spacing:.14em;will-change:transform,opacity}
 .puzzle-instruction{display:flex;align-items:center;gap:10px}.puzzle-instruction:before{content:"";width:28px;height:1px;background:currentColor}
 .puzzle-state{position:relative;min-width:82px;text-align:right}.puzzle-state b{font-weight:500;transition:opacity .35s ease,transform .35s ease}.state-connected{position:absolute;right:0;opacity:0;transform:translateY(7px);color:#3c7650}.hero-puzzle.solved .state-scattered{opacity:0;transform:translateY(-7px)}.hero-puzzle.solved .state-connected{opacity:1;transform:none}
 .puzzle-stage{
   width:min(930px,78vw);height:min(51vh,520px);min-height:400px;margin:2px auto 0;position:relative;overflow:visible;
-  --gap:10px;filter:drop-shadow(0 22px 28px rgba(10,42,34,.11))
+  --gap:10px;filter:drop-shadow(0 22px 28px rgba(10,42,34,.11));will-change:transform;transform-origin:center center
 }
 .puzzle-grid-mark{position:absolute;inset:0;border-radius:28px;border:1px dashed rgba(16,36,29,.12);opacity:0;transition:opacity .4s ease;pointer-events:none}
 .hero-puzzle.solved .puzzle-grid-mark{opacity:1}
@@ -379,7 +379,7 @@ svg{display:block}
 .hero-puzzle.solved .puzzle-piece{filter:drop-shadow(0 7px 10px rgba(10,42,34,.08))}
 .hero-puzzle.solved .piece-core{filter:drop-shadow(0 15px 26px rgba(10,42,34,.22))}
 @media(max-width:1100px){
-  .hero.hero-puzzle{min-height:195vh}.hero-sticky{padding-top:105px}
+  .hero.hero-puzzle{min-height:260vh}.hero-sticky{padding-top:105px}
   .hero-puzzle-copy{grid-template-columns:1fr}.hero-puzzle-side{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;max-width:none;padding-top:16px}.hero-puzzle-side p{max-width:660px;margin-bottom:0}
   .puzzle-wrap{margin-top:20px}.puzzle-stage{width:min(900px,88vw);height:min(48vh,480px)}
 }
@@ -405,4 +405,13 @@ svg{display:block}
 }
 @media(prefers-reduced-motion:reduce){
   .problem-word{filter:none!important;transform:none!important;opacity:1!important}
+}
+
+/* Immersive hero focus state */
+.hero-puzzle.focused .puzzle-stage{
+  filter:drop-shadow(0 34px 55px rgba(10,42,34,.16));
+}
+@media(max-width:760px){
+  .nav{position:absolute}
+  .problem{margin-top:0}
 }
