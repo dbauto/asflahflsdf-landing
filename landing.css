@@ -234,7 +234,7 @@ svg{display:block}
   overflow:hidden;box-shadow:0 55px 100px rgba(0,0,0,.26);transform:perspective(1100px) rotateX(1deg)
 }
 .demo-side{background:#0b261f;color:#fff;padding:22px 15px}
-.demo-logo{width:46px;height:46px;border-radius:13px;background:var(--lime);color:var(--deep);font-weight:850;display:grid;place-items:center;margin:4px 0 28px 3px}
+.demo-logo{width:58px;height:46px;border-radius:13px;background:var(--lime);color:var(--deep);font-weight:850;font-size:13px;letter-spacing:-.05em;display:grid;place-items:center;margin:4px 0 28px 3px}
 .demo-nav{display:flex;flex-direction:column;gap:6px}
 .demo-nav span{font-size:10px;padding:11px;border-radius:9px;opacity:.58}
 .demo-nav span.active{opacity:1;background:rgba(255,255,255,.1)}
