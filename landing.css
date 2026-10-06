@@ -306,8 +306,12 @@ svg{display:block}
 .process-head{display:grid;grid-template-columns:.35fr 1.65fr;gap:40px;align-items:start;margin-bottom:70px}
 .process-head h2{font-size:clamp(48px,6.5vw,96px);line-height:.94;letter-spacing:-.067em;margin:0}
 .process-list{border-top:1px solid var(--line)}
-.process-step{display:grid;grid-template-columns:90px .7fr 1fr 35px;gap:28px;align-items:center;min-height:178px;border-bottom:1px solid var(--line)}
-.process-step .n{font:500 9px "DM Mono";letter-spacing:.14em}.process-step h3{font-size:28px;letter-spacing:-.04em;margin:0}.process-step p{color:var(--muted);line-height:1.55;max-width:560px;font-size:13px}.process-step svg{width:20px;height:20px;opacity:.45;transition:.25s}.process-step:hover svg{transform:translateX(6px);opacity:1}
+.process-step{display:grid;grid-template-columns:90px .7fr 1fr 35px;gap:32px;align-items:center;min-height:210px;border-bottom:1px solid var(--line)}
+.process-step .n{font:500 11px "DM Mono";letter-spacing:.14em}
+.process-step h3{font-size:34px;line-height:1.08;letter-spacing:-.04em;margin:0}
+.process-step p{color:var(--muted);line-height:1.65;max-width:620px;font-size:16px}
+.process-step svg{width:22px;height:22px;opacity:.5;transition:.25s}
+.process-step:hover svg{transform:translateX(6px);opacity:1}
 
 .marquee{overflow:hidden;background:var(--orange);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:22px 0}
 .marquee-track{width:max-content;display:flex;gap:26px;align-items:center;animation:marquee 24s linear infinite;font-size:22px;font-weight:800;letter-spacing:-.035em}
@@ -371,7 +375,7 @@ svg{display:block}
   .doc-window{grid-template-columns:1fr}.doc-preview{display:none}.audit-grid{grid-template-columns:1fr}.audit-grid .action-card{display:none}
   .modules{padding-top:95px}.module-grid{grid-template-columns:1fr}.module{min-height:270px}
   .offer{padding-top:100px}.offer-grid{grid-template-columns:1fr}.offer-card{min-height:590px;padding:27px}
-  .process-head{grid-template-columns:1fr;gap:20px}.process-step{grid-template-columns:45px 1fr;gap:12px;padding:24px 0}.process-step p{grid-column:2}.process-step>svg{display:none}
+  .process-head{grid-template-columns:1fr;gap:20px}.process-step{grid-template-columns:45px 1fr;gap:12px;padding:28px 0;min-height:0}.process-step .n{font-size:10px}.process-step h3{font-size:26px}.process-step p{grid-column:2;font-size:15px;line-height:1.6}.process-step>svg{display:none}
   .faq-grid{grid-template-columns:1fr;gap:48px}.faq-a p{margin-left:0}
   .contact-card{padding:30px 22px;min-height:700px}.contact-copy h2{font-size:17vw}.footer{grid-template-columns:1fr;padding-top:35px;padding-bottom:35px}
 }
