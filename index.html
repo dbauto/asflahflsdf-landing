@@ -1,17 +1,507 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="iQMS Mini — a streamlined ISO 9001 quality management workspace, customized around your real process." />
-    <meta name="theme-color" content="#0b2d24" />
-    <title>iQMS Mini — Quality, made workable.</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="iQMS — a modern ISO 9001 quality management workspace for documents, processes, audits, actions, evidence, surveys, and readiness." />
+  <meta name="theme-color" content="#0a2a22" />
+  <meta property="og:title" content="iQMS — Quality, made workable." />
+  <meta property="og:description" content="Start with iQMS Mini, then customize the workflows and modules your organization actually needs." />
+  <meta property="og:type" content="website" />
+  <title>iQMS — Quality, made workable.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./landing.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="nav">
+    <a href="#top" class="brand" aria-label="iQMS home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>iQMS</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#system">How it works</a>
+      <a href="#modules">Modules</a>
+      <a href="#offer">Mini + Custom</a>
+      <a href="#process">Implementation</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href="#contact" class="nav-cta">
+      Request a walkthrough
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </header>
+
+  <div class="mobile-menu" aria-label="Mobile navigation">
+    <a href="#system">How it works</a>
+    <a href="#modules">Modules</a>
+    <a href="#offer">Mini + Custom</a>
+    <a href="#process">Implementation</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="btn lime">Request a walkthrough</a>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-kicker">ISO 9001 workspace · process-first QMS</div>
+        <div class="hero-grid">
+          <div>
+            <h1>
+              <span class="word">Quality</span>
+              <span class="word">shouldn't</span><br />
+              <span class="word"><em>feel like</em></span>
+              <span class="word">detective work.</span>
+            </h1>
+          </div>
+          <div class="hero-side reveal delay-2">
+            <p>iQMS brings documents, processes, audits, findings, evidence, surveys, and readiness into one understandable quality workspace — built around how your organization actually operates.</p>
+            <div class="hero-actions">
+              <a href="#offer" class="btn primary">
+                Explore iQMS Mini
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a href="#system" class="btn ghost">See the system</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-stage reveal">
+          <div class="orb a"></div>
+          <div class="orb b"></div>
+
+          <article class="float-card card-doc">
+            <span class="tag">DOCUMENT CONTROL</span>
+            <h3>Controlled.<br />Current.<br />Connected.</h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5M9 12h6M9 16h6"/></svg>
+          </article>
+
+          <article class="float-card card-audit">
+            <span class="tag">AUDITS</span>
+            <h3>Plan → Audit →<br />Follow through.</h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1z"/><path d="m9 15 2 2 4-5"/></svg>
+          </article>
+
+          <article class="float-card card-ready">
+            <span class="tag">ISO READINESS</span>
+            <div class="ready-row">
+              <b>82%</b>
+              <div class="ready-bars"><i></i><i></i><i></i></div>
+            </div>
+            <small>Clear status. Visible gaps. Actionable next steps.</small>
+          </article>
+
+          <article class="float-card card-flow">
+            <span class="tag">ONE SYSTEM</span>
+            <h3>Less chasing.<br />More clarity.</h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M8 6h8M7 8l4 8M17 8l-4 8"/></svg>
+          </article>
+
+          <div class="stage-note">SCROLL — PUT THE PIECES TOGETHER</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="problem">
+      <div class="container">
+        <div class="eyebrow reveal">The real problem</div>
+        <h2 class="big-statement reveal">When quality lives across folders, spreadsheets, chats, emails, and memory, <em>compliance becomes detective work.</em></h2>
+
+        <div class="problem-strip">
+          <article class="problem-card reveal">
+            <span class="num">01 / DOCUMENTS</span>
+            <h3>Which file is current?</h3>
+            <p>Revisions, owners, approvals, and evidence become difficult to trace when documents live in disconnected places.</p>
+          </article>
+          <article class="problem-card reveal delay-1">
+            <span class="num">02 / ACTIONS</span>
+            <h3>Who owns the next step?</h3>
+            <p>Findings and follow-ups disappear into messages when responsibility and due dates are not visible in one place.</p>
+          </article>
+          <article class="problem-card reveal delay-2">
+            <span class="num">03 / AUDITS</span>
+            <h3>What is actually ready?</h3>
+            <p>Teams prepare reactively because audit plans, evidence, findings, and corrective actions are not connected.</p>
+          </article>
+          <article class="problem-card reveal delay-3">
+            <span class="num">04 / MANAGEMENT</span>
+            <h3>Where are the gaps?</h3>
+            <p>Static reports show snapshots. A working QMS should show the source, owner, status, and next action behind every signal.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="system" class="system">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow reveal">A working QMS</div>
+          <h2 class="reveal">One system.<br />Every signal has a source.</h2>
+          <p class="reveal">The interface is only the surface. Underneath it, iQMS connects quality work to processes, responsible people, controlled documents, evidence, and follow-through.</p>
+        </div>
+
+        <div class="system-scroll">
+          <div class="story-list">
+            <article class="story-item active" data-panel="0">
+              <span>01 / READINESS</span>
+              <h3>See what needs attention.</h3>
+              <p>Readiness indicators are tied to actual requirements and work — not decorative dashboard cards.</p>
+            </article>
+            <article class="story-item" data-panel="1">
+              <span>02 / DOCUMENTS</span>
+              <h3>Control the document lifecycle.</h3>
+              <p>Keep ownership, revision, review, approval, publication, and linked source files visible.</p>
+            </article>
+            <article class="story-item" data-panel="2">
+              <span>03 / AUDITS</span>
+              <h3>Run audits end to end.</h3>
+              <p>Plan, schedule, assign, capture evidence, combine reports, raise findings, and monitor closure.</p>
+            </article>
+            <article class="story-item" data-panel="3">
+              <span>04 / ACTIONS</span>
+              <h3>Close the loop.</h3>
+              <p>Connect risks, nonconformities, corrective actions, due dates, owners, and verification in one trail.</p>
+            </article>
+          </div>
+
+          <div class="product-sticky reveal">
+            <div class="product-shell">
+              <aside class="demo-side">
+                <div class="demo-logo">iQ</div>
+                <div class="demo-nav">
+                  <span class="active">Overview</span>
+                  <span>Processes</span>
+                  <span>Documents</span>
+                  <span>Audits</span>
+                  <span>Actions</span>
+                  <span>Surveys</span>
+                  <span>Calendar</span>
+                </div>
+              </aside>
+
+              <div class="demo-main">
+                <div class="demo-top">
+                  <h4>ISO 9001 Readiness</h4>
+                  <div class="demo-pill">Open by clause</div>
+                </div>
+
+                <div class="demo-panel active">
+                  <div class="score-card">
+                    <div><b>82%</b><small>Overall readiness</small></div>
+                    <div class="segment"><i></i><i></i><i></i></div>
+                  </div>
+                  <div class="metric-grid">
+                    <div class="metric"><span>ALL CLEAR</span><b>12</b><small>requirements on track</small></div>
+                    <div class="metric"><span>NEEDS ATTENTION</span><b>3</b><small>items to review</small></div>
+                    <div class="metric"><span>CRITICAL</span><b>1</b><small>blocking gap</small></div>
+                  </div>
+                  <div class="demo-table">
+                    <div class="demo-row"><span>✓</span><b>Leadership & Context</b><span class="status">Ready</span></div>
+                    <div class="demo-row"><span>✓</span><b>Document Control</b><span class="status">Ready</span></div>
+                    <div class="demo-row"><span>!</span><b>Internal Audit</b><span class="status attn">Attention</span></div>
+                    <div class="demo-row"><span>×</span><b>Corrective Action</b><span class="status crit">Critical</span></div>
+                  </div>
+                </div>
+
+                <div class="demo-panel">
+                  <div class="doc-window">
+                    <div class="doc-list">
+                      <h5>Documents in Review</h5>
+                      <div class="doc-item active"><b>QMS Scope</b>Rev 04 · Owner: QMR</div>
+                      <div class="doc-item"><b>Quality Policy</b>Rev 07 · Approved</div>
+                      <div class="doc-item"><b>Design Procedure</b>Rev 03 · Review due</div>
+                      <div class="doc-item"><b>Supplier Evaluation</b>Rev 02 · Draft</div>
+                      <div class="doc-item"><b>Internal Audit Procedure</b>Rev 05 · Approved</div>
+                    </div>
+                    <div class="doc-preview">
+                      <h5>Controlled preview</h5>
+                      <div class="sheet">
+                        <div class="sheet-line"></div><div class="sheet-line"></div><div class="sheet-line"></div>
+                        <div class="sheet-line"></div><div class="sheet-line"></div><div class="sheet-line"></div>
+                        <div class="sheet-line"></div><div class="sheet-line"></div><div class="sheet-line"></div>
+                        <div class="sheet-line"></div><div class="sheet-line"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="demo-panel">
+                  <div class="audit-grid">
+                    <div class="audit-card large">
+                      <h5>October audit calendar</h5>
+                      <div class="calendar">
+                        <i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i>
+                        <i>8</i><i>9</i><i class="mid">10</i><i>11</i><i>12</i><i>13</i><i>14</i>
+                        <i>15</i><i class="hot">16</i><i>17</i><i>18</i><i>19</i><i>20</i><i>21</i>
+                        <i>22</i><i>23</i><i class="mid">24</i><i>25</i><i>26</i><i>27</i><i>28</i>
+                      </div>
+                    </div>
+                    <div class="audit-card">
+                      <h5>Upcoming</h5>
+                      <div class="audit-line"><span>Procurement</span><b>Oct 10</b></div>
+                      <div class="audit-line"><span>Engineering</span><b>Oct 16</b></div>
+                      <div class="audit-line"><span>Operations</span><b>Oct 24</b></div>
+                    </div>
+                    <div class="audit-card">
+                      <h5>Audit status</h5>
+                      <div class="audit-line"><span>Plans ready</span><b>6</b></div>
+                      <div class="audit-line"><span>Open findings</span><b>4</b></div>
+                      <div class="audit-line"><span>Reports due</span><b>2</b></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="demo-panel">
+                  <div class="action-card">
+                    <h5>Corrective actions & follow-up</h5>
+                    <div class="action-list">
+                      <div class="action"><span><b>NC-024</b><br />Supplier qualification evidence</span><span class="status attn">Due soon</span></div>
+                      <div class="action"><span><b>RISK-011</b><br />Design review handoff</span><span class="status">Monitoring</span></div>
+                      <div class="action"><span><b>CAPA-018</b><br />Training record completeness</span><span class="status">Verification</span></div>
+                      <div class="action"><span><b>NC-027</b><br />Document revision mismatch</span><span class="status crit">Overdue</span></div>
+                    </div>
+                  </div>
+                  <div class="survey-card" style="margin-top:12px">
+                    <h5>Customer feedback</h5>
+                    <div class="audit-line"><span>CSAT responses</span><b>48</b></div>
+                    <div class="audit-line"><span>Needs follow-up</span><b>3</b></div>
+                    <div class="audit-line"><span>Survey status</span><b>Live</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="modules" class="modules">
+      <div class="container">
+        <div class="modules-head">
+          <div>
+            <div class="eyebrow reveal">Core capability</div>
+            <h2 class="reveal">Everything quality work needs to stay connected.</h2>
+          </div>
+          <p class="reveal">Start with the essentials. Add the modules and workflow depth that match your actual quality system.</p>
+        </div>
+
+        <div class="module-grid">
+          <article class="module reveal">
+            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5M9 12h6M9 16h6"/></svg></div>
+            <span class="index">01</span><h3>Document Control</h3><p>Revisions, owners, review status, approvals, publishing, and linked source documents.</p>
+          </article>
+          <article class="module reveal delay-1">
+            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M8 6h8M7 8l4 8M17 8l-4 8"/></svg></div>
+            <span class="index">02</span><h3>Process Management</h3><p>Organize requirements, documents, risks, owners, and evidence around the way work actually flows.</p>
+          </article>
+          <article class="module reveal delay-2">
+            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1z"/><path d="m9 15 2 2 4-5"/></svg></div>
+            <span class="index">03</span><h3>Audit Management</h3><p>Plans, schedules, checklists, auditor assignments, evidence, reports, and combined findings.</p>
+          </article>
+          <article class="module reveal delay-3">
+            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3 2.8 20h18.4z"/><path d="M12 9v5M12 17h.01"/></svg></div>
+            <span class="index">04</span><h3>Risk, NC & CAPA</h3><p>Track risks, nonconformities, corrective actions, owners, due dates, verification, and closure.</p>
+          </article>
+          <article class="module reveal">
+            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 4h16v13H8l-4 4z"/><path d="M8 9h8M8 13h5"/></svg></div>
+            <span class="index">05</span><h3>Surveys & CSAT</h3><p>Create customer feedback surveys, publish QR access, monitor responses, and flag follow-up.</p>
+          </article>
+          <article class="module reveal delay-1">
+            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1z"/></svg></div>
+            <span class="index">06</span><h3>Quality Calendar</h3><p>See audits, reviews, action deadlines, evaluations, and quality events in a shared schedule.</p>
+          </article>
+          <article class="module reveal delay-2">
+            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16v13H4z"/><path d="M8 7V4h8v3M9 12h6M9 16h4"/></svg></div>
+            <span class="index">07</span><h3>Evidence & Records</h3><p>Link supporting evidence to audits, processes, clauses, actions, and document records for traceability.</p>
+          </article>
+          <article class="module reveal delay-3">
+            <div class="module-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
+            <span class="index">08</span><h3>Readiness & Monitoring</h3><p>Surface what is clear, what needs attention, and what is blocking readiness — down to the source.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="offer" class="offer">
+      <div class="container">
+        <div class="offer-head">
+          <div class="eyebrow reveal">The business model</div>
+          <h2 class="reveal">Start focused.<br />Customize where it matters.</h2>
+        </div>
+
+        <div class="offer-grid">
+          <article class="offer-card mini reveal">
+            <div class="offer-label">iQMS MINI</div>
+            <h3>Your practical starting point.</h3>
+            <p>A clean, usable QMS front end for organizations that need structure now without committing to a large enterprise implementation on day one.</p>
+            <ul>
+              <li>Process and area structure</li>
+              <li>Controlled document register</li>
+              <li>Readiness overview</li>
+              <li>Audit workspace foundation</li>
+              <li>Tasks, ownership, and status visibility</li>
+              <li>Responsive, branded interface</li>
+            </ul>
+            <a href="#contact" class="btn primary">Start with Mini</a>
+          </article>
+
+          <article class="offer-card custom reveal delay-1">
+            <div class="offer-label">CUSTOM IMPLEMENTATION</div>
+            <h3>Shape iQMS around your organization.</h3>
+            <p>Extend the Mini foundation into a tailored quality operating system with the modules, terminology, approvals, integrations, and permissions your teams actually need.</p>
+            <ul>
+              <li>Custom workflows and approval rules</li>
+              <li>Microsoft 365 / SharePoint integration</li>
+              <li>Audit, NCR / CAPA, risk, and survey modules</li>
+              <li>Roles, permissions, and organizational structure</li>
+              <li>Custom dashboards, fields, terminology, and branding</li>
+              <li>Industry-specific quality workflows</li>
+            </ul>
+            <a href="#contact" class="btn lime">Plan a custom build</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="integration">
+      <div class="container integration-grid">
+        <div>
+          <div class="eyebrow reveal">Designed to work with your stack</div>
+          <h2 class="reveal">Your QMS app doesn't have to become your document vault.</h2>
+          <p class="reveal">For Microsoft 365 organizations, iQMS can be configured so the application manages the process and traceability while controlled files remain in the organization's SharePoint or OneDrive environment.</p>
+          <div class="integration-notes">
+            <div class="integration-note reveal"><span>✓</span><div>Use scoped access to the quality content required by the implementation.</div></div>
+            <div class="integration-note reveal delay-1"><span>✓</span><div>Keep the QMS experience focused on workflow, accountability, status, and evidence.</div></div>
+            <div class="integration-note reveal delay-2"><span>✓</span><div>Adapt the architecture and access model to the client's security and compliance requirements.</div></div>
+          </div>
+        </div>
+
+        <div class="integration-visual reveal">
+          <div class="cloud"></div>
+          <div class="stack-card one">
+            <span>MICROSOFT 365</span>
+            <h3>Controlled files stay where your organization manages them.</h3>
+          </div>
+          <div class="stack-card two">
+            <span>iQMS PROCESS LAYER</span>
+            <h3>Review, approval, audits, actions, evidence, and status.</h3>
+          </div>
+          <div class="stack-card three">
+            <span>QUALITY EXPERIENCE</span>
+            <h3>One clear workspace for users, auditors, and management.</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="process">
+      <div class="container">
+        <div class="process-head">
+          <div class="eyebrow reveal">Implementation</div>
+          <h2 class="reveal">Build the system from the process outward.</h2>
+        </div>
+
+        <div class="process-list">
+          <article class="process-step reveal">
+            <span class="n">01</span><h3>Discover</h3><p>Map your processes, areas, quality documents, responsibilities, ISO requirements, and current pain points.</p>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </article>
+          <article class="process-step reveal">
+            <span class="n">02</span><h3>Configure</h3><p>Set the structure, terminology, fields, ownership, document links, roles, and the Mini modules you need first.</p>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </article>
+          <article class="process-step reveal">
+            <span class="n">03</span><h3>Validate</h3><p>Walk the workflow with real users, confirm approval paths, edge cases, security scope, and the information behind each status.</p>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </article>
+          <article class="process-step reveal">
+            <span class="n">04</span><h3>Extend</h3><p>Add deeper workflows, integrations, audit automation, surveys, dashboards, or specialized modules as the QMS matures.</p>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>PROCESSES</span><i>•</i><span>DOCUMENTS</span><i>•</i><span>AUDITS</span><i>•</i><span>ACTIONS</span><i>•</i><span>EVIDENCE</span><i>•</i><span>READINESS</span><i>•</i>
+        <span>PROCESSES</span><i>•</i><span>DOCUMENTS</span><i>•</i><span>AUDITS</span><i>•</i><span>ACTIONS</span><i>•</i><span>EVIDENCE</span><i>•</i><span>READINESS</span><i>•</i>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="container faq-grid">
+        <div>
+          <div class="eyebrow reveal">FAQ</div>
+          <h2 class="reveal">Before we build.</h2>
+        </div>
+
+        <div class="faq-list reveal">
+          <article class="faq-item open">
+            <button class="faq-q" type="button" aria-expanded="true"><span>01</span><strong>Is iQMS Mini a full enterprise QMS?</strong><b>−</b></button>
+            <div class="faq-a"><p>Mini is intentionally focused. It gives teams a strong quality-management foundation first, then allows the implementation to expand only where the organization needs more workflow depth or specialized modules.</p></div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false"><span>02</span><strong>Can we customize the workflows and terminology?</strong><b>+</b></button>
+            <div class="faq-a"><p>Yes. Customization is a core part of the offer. Processes, fields, labels, roles, approvals, dashboards, integrations, and modules can be adapted around the client's quality system.</p></div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false"><span>03</span><strong>Do we have to upload every document into iQMS?</strong><b>+</b></button>
+            <div class="faq-a"><p>No. A Microsoft 365 implementation can be designed so controlled documents remain in SharePoint or OneDrive while iQMS manages the surrounding process, links, metadata, status, approvals, and traceability.</p></div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false"><span>04</span><strong>Does iQMS guarantee ISO 9001 certification?</strong><b>+</b></button>
+            <div class="faq-a"><p>No software can guarantee certification. iQMS is designed to make the management system easier to organize, operate, evidence, monitor, and improve so the organization can manage its own readiness more effectively.</p></div>
+          </article>
+          <article class="faq-item">
+            <button class="faq-q" type="button" aria-expanded="false"><span>05</span><strong>Can we start with document management and add more later?</strong><b>+</b></button>
+            <div class="faq-a"><p>Yes. That is the intended rollout model: begin with the most valuable foundation, validate it with users, then add audit, nonconformity, risk, survey, monitoring, and other custom capabilities as priorities become clear.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="contact-card reveal">
+          <div class="contact-copy">
+            <div class="eyebrow">Your QMS, without the clutter</div>
+            <h2>Start with Mini.<br /><em>Make it yours.</em></h2>
+            <p>Tell us how your current quality process works, where the friction is, and which part you want to improve first. We can map the right iQMS starting point around that.</p>
+          </div>
+
+          <form class="contact-form">
+            <label for="name">YOUR NAME</label>
+            <input id="name" name="name" placeholder="Name" required />
+            <label for="company">ORGANIZATION</label>
+            <input id="company" name="company" placeholder="Company / organization" />
+            <label for="need">WHAT DO YOU WANT TO IMPROVE FIRST?</label>
+            <textarea id="need" name="need" placeholder="Document control, audits, CAPA, surveys, readiness, custom workflow..."></textarea>
+            <button class="btn lime" type="submit">
+              Request a walkthrough
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p class="form-note">Demo form only for now. Connect this to your preferred email, CRM, booking, or automation workflow before launch.</p>
+            <div class="form-success">Looks good — the landing-page interaction is working. Connect this form to your preferred intake workflow for production.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <a href="#top" class="brand"><span class="brand-mark" aria-hidden="true"></span><span>iQMS</span></a>
+    <p>Quality management that works like your business does.</p>
+    <small>© 2026 iQMS</small>
+  </footer>
+
+  <script src="./landing.js" defer></script>
+</body>
 </html>
