@@ -119,20 +119,42 @@ svg{display:block}
 .card-ready small{font-size:10px;opacity:.62;margin-top:17px}
 .stage-note{position:absolute;left:24px;bottom:21px;color:#fff;font:400 9px "DM Mono";letter-spacing:.16em;opacity:.64}
 
-.problem{padding-top:160px;padding-bottom:160px}
+.problem{padding-top:0;padding-bottom:160px;position:relative}
+.problem-scroll{height:180vh;position:relative}
+.problem-sticky-copy{
+  position:sticky;
+  top:0;
+  min-height:100vh;
+  padding-top:clamp(120px,14vh,170px);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
 .big-statement{max-width:1320px;font-size:clamp(42px,6vw,92px);line-height:1.01;letter-spacing:-.065em;margin:38px 0 0;font-weight:560}
 .big-statement em{font-family:Georgia,serif;font-weight:400;color:#6d7772}
-.big-statement.problem-animated.reveal{opacity:1;transform:none}
+.big-statement.problem-animated{opacity:1;transform:none}
 .problem-word{
   display:inline-block;
-  opacity:.12;
-  transform:translate3d(0,30px,0);
-  filter:blur(5.5px);
+  opacity:.10;
+  transform:translate3d(0,34px,0);
+  filter:blur(7px);
   will-change:transform,opacity,filter;
   backface-visibility:hidden;
 }
 .problem-word-italic{color:#6d7772}
 .problem .eyebrow,.problem .statement-kicker{will-change:transform,opacity}
+.problem-scroll-hint{
+  margin-top:auto;
+  padding-bottom:48px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font:500 8px "DM Mono",monospace;
+  letter-spacing:.17em;
+  opacity:.62;
+  transition:opacity .1s linear;
+}
+.problem-scroll-hint span{width:36px;height:1px;background:currentColor}
 .problem-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:78px}
 .problem-card{min-height:260px;padding:24px;border:1px solid var(--line);border-radius:20px;display:flex;flex-direction:column}
 .problem-card .num{font:500 9px "DM Mono";letter-spacing:.14em;opacity:.55}
@@ -288,7 +310,7 @@ svg{display:block}
   .card-doc{left:5%;top:56px;width:190px;height:168px}.card-audit{left:auto;right:5%;top:180px;width:190px;height:185px}
   .card-ready{left:5%;right:auto;top:337px;width:230px;height:150px}.card-flow{display:none}
   .float-card h3{font-size:19px}.ready-row{margin-top:13px}.ready-row b{font-size:40px}.ready-bars i{width:20px}.card-ready small{margin-top:11px}
-  .problem{padding-top:110px;padding-bottom:110px}.problem-strip{grid-template-columns:1fr}
+  .problem{padding-top:0;padding-bottom:110px}.problem-scroll{height:auto}.problem-sticky-copy{position:relative;min-height:0;padding-top:110px}.problem-scroll-hint{display:none}.problem-strip{grid-template-columns:1fr}
   .system{padding-top:90px}.story-list{grid-template-columns:1fr 1fr}.product-shell{grid-template-columns:1fr;height:540px}.demo-side{display:none}.demo-main{padding:16px}.demo-panel{left:16px;right:16px;top:65px;bottom:16px}
   .metric-grid{grid-template-columns:1fr 1fr}.metric-grid .metric:last-child{display:none}.segment i{width:32px}.score-card b{font-size:42px}
   .doc-window{grid-template-columns:1fr}.doc-preview{display:none}.audit-grid{grid-template-columns:1fr}.audit-grid .action-card{display:none}
