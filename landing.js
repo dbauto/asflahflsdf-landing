@@ -1,6 +1,7 @@
 (() => {
   const root = document.documentElement;
   const progress = document.querySelector('.scroll-progress span');
+  const backToTop = document.querySelector('.back-to-top');
   const puzzleHero = document.querySelector('.hero-puzzle');
   const puzzleStage = document.querySelector('.puzzle-stage');
   const puzzlePieces = Array.from(document.querySelectorAll('.puzzle-piece'));
@@ -81,6 +82,13 @@
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const max = document.documentElement.scrollHeight - window.innerHeight;
     if (progress) progress.style.width = (max > 0 ? (scrollTop / max) * 100 : 0) + '%';
+
+    if (backToTop) {
+      const shouldShow = scrollTop > Math.max(180, window.innerHeight * .22);
+      backToTop.classList.toggle('visible', shouldShow);
+      backToTop.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+      backToTop.tabIndex = shouldShow ? 0 : -1;
+    }
 
     if (puzzleHero && puzzlePieces.length) {
       const heroRect = puzzleHero.getBoundingClientRect();
@@ -233,6 +241,13 @@
   }
 
   updateScroll();
+
+  backToTop?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: reduceMotion ? 'auto' : 'smooth'
+    });
+  });
 
   document.querySelectorAll('.faq-q').forEach(button => {
     button.addEventListener('click', () => {
