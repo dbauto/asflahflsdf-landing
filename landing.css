@@ -292,3 +292,76 @@ svg{display:block}
   *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}.word{opacity:1;transform:none}
 }
+
+/* === Quadro-inspired interactive puzzle hero === */
+.hero.hero-puzzle{min-height:195vh;padding:0;position:relative}
+.hero-sticky{position:sticky;top:0;height:100vh;min-height:760px;overflow:hidden;padding-top:112px;display:flex;align-items:flex-start}
+.hero-puzzle-inner{height:100%;display:flex;flex-direction:column}
+.hero-puzzle-top{display:flex;justify-content:space-between;gap:24px;align-items:center}
+.hero-mini-note{font:500 9px "DM Mono",monospace;letter-spacing:.14em;opacity:.48}
+.hero-puzzle-copy{display:grid;grid-template-columns:1.5fr .5fr;gap:5vw;align-items:end;margin-top:18px;position:relative;z-index:4}
+.hero-puzzle-title{margin:0!important;font-size:clamp(64px,8.3vw,128px)!important;line-height:.78!important;letter-spacing:-.077em!important;max-width:1100px!important}
+.hero-puzzle-title em{font-family:Georgia,serif;font-weight:400}
+.hero-puzzle-side{padding-bottom:5px}
+.hero-puzzle-side p{font-size:clamp(15px,1.15vw,19px)}
+.puzzle-wrap{margin-top:32px;flex:1;min-height:0;display:flex;flex-direction:column;position:relative;z-index:2}
+.puzzle-meta{height:30px;display:flex;justify-content:space-between;align-items:center;font:500 9px "DM Mono",monospace;letter-spacing:.14em}
+.puzzle-instruction{display:flex;align-items:center;gap:10px}.puzzle-instruction:before{content:"";width:28px;height:1px;background:currentColor}
+.puzzle-state{position:relative;min-width:82px;text-align:right}.puzzle-state b{font-weight:500;transition:opacity .35s ease,transform .35s ease}.state-connected{position:absolute;right:0;opacity:0;transform:translateY(7px);color:#3c7650}.hero-puzzle.solved .state-scattered{opacity:0;transform:translateY(-7px)}.hero-puzzle.solved .state-connected{opacity:1;transform:none}
+.puzzle-stage{
+  width:min(930px,78vw);height:min(51vh,520px);min-height:400px;margin:2px auto 0;position:relative;overflow:visible;
+  --gap:10px;filter:drop-shadow(0 22px 28px rgba(10,42,34,.11))
+}
+.puzzle-grid-mark{position:absolute;inset:0;border-radius:28px;border:1px dashed rgba(16,36,29,.12);opacity:0;transition:opacity .4s ease;pointer-events:none}
+.hero-puzzle.solved .puzzle-grid-mark{opacity:1}
+.puzzle-piece{
+  position:absolute;
+  left:calc(var(--col) * 33.333% + var(--gap));
+  top:calc(var(--row) * 33.333% + var(--gap));
+  width:calc(33.333% - var(--gap) * 2);
+  height:calc(33.333% - var(--gap) * 2);
+  z-index:3;will-change:transform;transform-origin:center;
+  transition:filter .2s ease;filter:drop-shadow(0 13px 18px rgba(10,42,34,.14))
+}
+.puzzle-piece:hover{filter:drop-shadow(0 20px 28px rgba(10,42,34,.24));z-index:8}
+.piece-face{
+  --piece-bg:var(--paper);height:100%;border-radius:18px;background:var(--piece-bg);padding:16px;display:flex;flex-direction:column;
+  border:1px solid rgba(16,36,29,.08);position:relative;overflow:visible
+}
+.puzzle-piece.tab-r .piece-face:after{content:"";position:absolute;width:30px;height:30px;border-radius:50%;right:-16px;top:calc(50% - 15px);background:var(--piece-bg);border:1px solid rgba(16,36,29,.06);border-left:0;z-index:2}
+.puzzle-piece.tab-b .piece-face:after{content:"";position:absolute;width:30px;height:30px;border-radius:50%;bottom:-16px;left:calc(50% - 15px);background:var(--piece-bg);border:1px solid rgba(16,36,29,.06);border-top:0;z-index:2}
+.piece-mint .piece-face{--piece-bg:var(--mint)}.piece-paper .piece-face{--piece-bg:var(--paper)}
+.piece-lime .piece-face{--piece-bg:var(--lime)}.piece-orange .piece-face{--piece-bg:var(--orange)}
+.piece-yellow .piece-face{--piece-bg:var(--yellow)}.piece-dark .piece-face{--piece-bg:var(--deep);color:#fff}
+.piece-core .piece-face{--piece-bg:#102b24;background:linear-gradient(145deg,#123d32,#09241d);color:#fff;border-color:rgba(255,255,255,.1);justify-content:center;align-items:center;text-align:center}
+.piece-index{font:500 8px "DM Mono",monospace;opacity:.5}.piece-label{font:500 8px "DM Mono",monospace;letter-spacing:.14em;margin-top:4px}
+.piece-face>svg{width:24px;height:24px;margin:auto 0 6px}.piece-face>strong{font-size:clamp(15px,1.3vw,20px);line-height:1.04;letter-spacing:-.035em}
+.piece-score{font-size:clamp(36px,4vw,58px);font-weight:800;letter-spacing:-.075em;margin:auto 0 4px}
+.piece-bars{display:flex;gap:4px}.piece-bars i{display:block;height:7px;flex:1;border-radius:99px}.piece-bars i:nth-child(1){background:#4b8b63}.piece-bars i:nth-child(2){background:#d7a63f}.piece-bars i:nth-child(3){background:#be5a52}
+.mini-flow{display:flex;gap:7px;align-items:center;margin:auto 0}.mini-flow i{width:25px;height:25px;border:1px solid rgba(16,36,29,.22);border-radius:8px;position:relative}.mini-flow i:not(:last-child):after{content:"";position:absolute;width:8px;height:1px;background:rgba(16,36,29,.35);right:-8px;top:12px}
+.evidence-lines{margin:auto 0;display:grid;gap:7px}.evidence-lines i{height:6px;background:rgba(255,255,255,.24);border-radius:99px}.evidence-lines i:nth-child(2){width:76%}.evidence-lines i:nth-child(3){width:53%}
+.capa-status{margin:auto 0 9px;display:flex;align-items:center;gap:8px}.capa-status i{width:10px;height:10px;border-radius:50%;background:var(--red)}.capa-status span{font:500 7px "DM Mono";letter-spacing:.08em}
+.avatar-row{display:flex;margin:auto 0 8px}.avatar-row i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid var(--mint);font-style:normal;font-size:9px;font-weight:800;margin-right:-7px}
+.piece-core-kicker{font:500 7px "DM Mono";letter-spacing:.16em;color:var(--lime)}.piece-core-logo{font-size:clamp(30px,4vw,56px);font-weight:850;letter-spacing:-.075em;margin:5px 0}.piece-core-sub{font-size:9px;line-height:1.4;opacity:.6;max-width:160px}
+.hero-puzzle.solved .puzzle-piece{filter:drop-shadow(0 7px 10px rgba(10,42,34,.08))}
+.hero-puzzle.solved .piece-core{filter:drop-shadow(0 15px 26px rgba(10,42,34,.22))}
+@media(max-width:1100px){
+  .hero.hero-puzzle{min-height:175vh}.hero-sticky{padding-top:105px}
+  .hero-puzzle-copy{grid-template-columns:1fr}.hero-puzzle-side{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;max-width:none;padding-top:16px}.hero-puzzle-side p{max-width:660px;margin-bottom:0}
+  .puzzle-wrap{margin-top:20px}.puzzle-stage{width:min(900px,88vw);height:min(48vh,480px)}
+}
+@media(max-width:760px){
+  .hero.hero-puzzle{min-height:auto;padding:105px 0 70px}.hero-sticky{position:relative;height:auto;min-height:0;padding-top:0;overflow:visible}
+  .hero-puzzle-top{align-items:flex-start}.hero-mini-note{display:none}
+  .hero-puzzle-title{font-size:17vw!important;line-height:.82!important}
+  .hero-puzzle-copy{margin-top:16px}.hero-puzzle-side{display:block;padding-top:24px}.hero-puzzle-side p{font-size:15px;margin-bottom:20px}
+  .puzzle-wrap{margin-top:40px}.puzzle-meta{margin-bottom:12px}.puzzle-stage{width:100%;height:560px;min-height:0;overflow:hidden;border-radius:24px;background:rgba(16,36,29,.035);padding:0}
+  .puzzle-piece{width:31%;height:30%;left:calc(var(--col) * 33.333% + 1.2%);top:calc(var(--row) * 33.333% + 1.4%);transform:none!important;filter:none!important}
+  .piece-face{padding:11px;border-radius:13px}.puzzle-piece.tab-r .piece-face:after,.puzzle-piece.tab-b .piece-face:after{display:none}
+  .piece-face>strong{font-size:12px}.piece-face>svg{width:20px;height:20px}.piece-label{font-size:6px}.piece-index{font-size:6px}.piece-score{font-size:31px}
+  .piece-core-logo{font-size:30px}.piece-core-sub{font-size:7px}.piece-core-kicker{font-size:5px}.avatar-row i{width:24px;height:24px}.capa-status span{font-size:5px}
+  .puzzle-instruction{font-size:7px}.puzzle-state{font-size:7px}.hero-puzzle .state-scattered{display:none}.hero-puzzle .state-connected{opacity:1;transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero.hero-puzzle{min-height:auto;padding:120px 0 80px}.hero-sticky{position:relative;height:auto;min-height:0;padding-top:0}.puzzle-piece{transform:none!important}
+}
