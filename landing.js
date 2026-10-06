@@ -5,6 +5,10 @@
   const puzzleStage = document.querySelector('.puzzle-stage');
   const puzzlePieces = Array.from(document.querySelectorAll('.puzzle-piece'));
   const puzzleTitle = document.querySelector('.hero-puzzle-title');
+  const problemSection = document.querySelector('.problem');
+  const problemStatement = document.querySelector('.big-statement');
+  const problemKicker = problemSection?.querySelector('.statement-kicker, .eyebrow');
+  const problemWords = [];
   const menuBtn = document.querySelector('.menu-toggle');
   const mobileMenu = document.querySelector('.mobile-menu');
   const storyItems = Array.from(document.querySelectorAll('.story-item'));
@@ -19,6 +23,42 @@
 
   menuBtn?.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
   mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+  // Turn the problem statement into individually scroll-scrubbed words while
+  // preserving the italic emphasis already in the markup.
+  if (problemStatement) {
+    const wrapProblemWords = (node, inheritedItalic = false) => {
+      Array.from(node.childNodes).forEach(child => {
+        if (child.nodeType === Node.TEXT_NODE) {
+          const fragment = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) {
+              fragment.appendChild(document.createTextNode(part));
+              return;
+            }
+
+            const span = document.createElement('span');
+            span.className = 'problem-word' + (inheritedItalic ? ' problem-word-italic' : '');
+            span.textContent = part;
+            span.setAttribute('aria-hidden', 'true');
+            fragment.appendChild(span);
+            problemWords.push(span);
+          });
+          child.replaceWith(fragment);
+          return;
+        }
+
+        if (child.nodeType === Node.ELEMENT_NODE) {
+          wrapProblemWords(child, inheritedItalic || child.tagName === 'EM');
+        }
+      });
+    };
+
+    wrapProblemWords(problemStatement);
+    problemStatement.classList.add('problem-animated');
+    problemStatement.setAttribute('aria-label', 'When quality lives across folders, spreadsheets, chats, emails, and memory, compliance becomes detective work.');
+  }
 
   const reveals = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
@@ -82,6 +122,36 @@
       if (puzzleTitle && desktopMotion) {
         puzzleTitle.style.transform = 'translateY(' + (-10 * p) + 'px)';
         puzzleTitle.style.opacity = String(1 - p * .12);
+      }
+    }
+
+    if (problemSection && problemWords.length) {
+      const rect = problemSection.getBoundingClientRect();
+      const viewport = window.innerHeight;
+
+      // Start while the statement is approaching the viewport and finish
+      // before the cards become the visual focus.
+      const rawProblem = Math.max(0, Math.min(1, (viewport * .86 - rect.top) / (viewport * .92)));
+      const wordCount = Math.max(1, problemWords.length - 1);
+
+      problemWords.forEach((word, index) => {
+        const isItalic = word.classList.contains('problem-word-italic');
+        const stagger = (index / wordCount) * .70 + (isItalic ? .035 : 0);
+        const local = Math.max(0, Math.min(1, (rawProblem - stagger) / .24));
+        const eased = local * local * (3 - 2 * local);
+        const y = 30 * (1 - eased);
+        const x = isItalic ? 18 * (1 - eased) : 0;
+        const blur = 5.5 * (1 - eased);
+
+        word.style.opacity = String(.12 + eased * .88);
+        word.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+        word.style.filter = 'blur(' + blur + 'px)';
+      });
+
+      if (problemKicker && !reduceMotion) {
+        const kp = Math.max(0, Math.min(1, rawProblem * 2.2));
+        problemKicker.style.opacity = String(.35 + kp * .65);
+        problemKicker.style.transform = 'translateY(' + (12 * (1 - kp)) + 'px)';
       }
     }
 
